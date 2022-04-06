@@ -4,6 +4,7 @@ python main.py --interface <type-inter-here> --mac <type-mac-here>
 '''
 import subprocess
 import optparse
+import re
 
 def get_arguments():
   #Adding options to the scripts --i show info. about interface --m show info about mac.
@@ -23,10 +24,32 @@ def change_mac(interface, new_mac):
   subprocess.call(["ifconfg", interface, "down", shell=True])
   subprocess.call(["ifconfg", interface, "hw", "ether", + new_mac, shell=True])
   subprocess.call(["ifconfg", interface, "up", shell=True])
+
+ #Verify if the Mac address was changed as requested
+
+
+
+
+
+
   
 options = get_arguments()
 change_mac(options.interface, options.new_mac)
 
+def get_current_mac(interface):
+  #capture output of ifconfig command and stores it in a variable
+  check_inter = subprocess.check_output(["ifconfig", options.interface])
 
+  #Extract field of ether address by using regular expressions
+  #Hint use www.pythex.org 
+  filter_mac-address = re.search(r"\w\w:\w\w:\w\w:\w\w:\w\w:\w\w", check_inter)
 
+  #Verify if the mac-address was changed as requested
+  if filter_mac-address:
+    print(filter_mac-address.group(0))
+  else:
+    print("[-] Could not read MAC address.")
+
+  #Check user input and check if the value of the variable is the same as user entered.
+  
 
