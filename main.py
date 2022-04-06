@@ -46,10 +46,14 @@ def get_current_mac(interface):
 
   #Verify if the mac-address was changed as requested
   if filter_mac-address:
-    print(filter_mac-address.group(0))
+    return print(filter_mac-address.group(0))
   else:
     print("[-] Could not read MAC address.")
 
   #Check user input and check if the value of the variable is the same as user entered.
   
-
+options = get_arguments
+current_mac = get_current_mac(options.interface)
+print("Current MAC = " + str(current_mac))
+change_mac(options.interface, options.new_mac)
+                             
