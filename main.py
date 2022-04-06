@@ -25,14 +25,7 @@ def change_mac(interface, new_mac):
   subprocess.call(["ifconfg", interface, "hw", "ether", + new_mac, shell=True])
   subprocess.call(["ifconfg", interface, "up", shell=True])
 
- #Verify if the Mac address was changed as requested
-
-
-
-
-
-
-  
+#Verify if the Mac address was changed as requested
 options = get_arguments()
 change_mac(options.interface, options.new_mac)
 
@@ -50,10 +43,19 @@ def get_current_mac(interface):
   else:
     print("[-] Could not read MAC address.")
 
-  #Check user input and check if the value of the variable is the same as user entered.
-  
+
+#Check user input and check if the value of the variable is the same as user entered
+
 options = get_arguments
 current_mac = get_current_mac(options.interface)
 print("Current MAC = " + str(current_mac))
 change_mac(options.interface, options.new_mac)
+
+current_mac = get_current_mac(options.interface)
+if current_mac == options.new_mac:
+  print("[+] MAC address was successfully chaned to " + current_mac)
+else:
+  print(["[-] MAC address did not changed.")
+
+
                              
